@@ -1,0 +1,13 @@
+[ 2026-06-16 22:40:59,434] 9 root - INFO = starting data ingestion from Hugging face
+[ 2026-06-16 22:41:01,178] 1025 httpx - INFO = HTTP Request: HEAD https://huggingface.co/datasets/KisanVaani/agriculture-qa-english-only/resolve/main/README.md "HTTP/1.1 307 Temporary Redirect"
+[ 2026-06-16 22:41:01,290] 1025 httpx - INFO = HTTP Request: HEAD https://huggingface.co/api/resolve-cache/datasets/KisanVaani/agriculture-qa-english-only/2f32fb399fbb71eb417235aeb349e637f785a0fd/README.md "HTTP/1.1 200 OK"
+[ 2026-06-16 22:41:01,689] 1025 httpx - INFO = HTTP Request: HEAD https://huggingface.co/datasets/KisanVaani/agriculture-qa-english-only/resolve/2f32fb399fbb71eb417235aeb349e637f785a0fd/agriculture-qa-english-only.py "HTTP/1.1 404 Not Found"
+[ 2026-06-16 22:41:01,690] 904 huggingface_hub.utils._http - WARNING = Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[ 2026-06-16 22:41:02,917] 1025 httpx - INFO = HTTP Request: HEAD https://s3.amazonaws.com/datasets.huggingface.co/datasets/datasets/KisanVaani/agriculture-qa-english-only/KisanVaani/agriculture-qa-english-only.py "HTTP/1.1 404 Not Found"
+[ 2026-06-16 22:41:03,327] 1025 httpx - INFO = HTTP Request: GET https://huggingface.co/api/datasets/KisanVaani/agriculture-qa-english-only/revision/2f32fb399fbb71eb417235aeb349e637f785a0fd "HTTP/1.1 200 OK"
+[ 2026-06-16 22:41:03,744] 1025 httpx - INFO = HTTP Request: HEAD https://huggingface.co/datasets/KisanVaani/agriculture-qa-english-only/resolve/2f32fb399fbb71eb417235aeb349e637f785a0fd/.huggingface.yaml "HTTP/1.1 404 Not Found"
+[ 2026-06-16 22:41:04,454] 1025 httpx - INFO = HTTP Request: GET https://datasets-server.huggingface.co/info?dataset=KisanVaani/agriculture-qa-english-only "HTTP/1.1 200 OK"
+[ 2026-06-16 22:41:04,761] 1025 httpx - INFO = HTTP Request: GET https://huggingface.co/api/datasets/KisanVaani/agriculture-qa-english-only/tree/2f32fb399fbb71eb417235aeb349e637f785a0fd/data?recursive=true&expand=false "HTTP/1.1 200 OK"
+[ 2026-06-16 22:41:05,170] 1025 httpx - INFO = HTTP Request: GET https://huggingface.co/api/datasets/KisanVaani/agriculture-qa-english-only/tree/2f32fb399fbb71eb417235aeb349e637f785a0fd?recursive=false&expand=false "HTTP/1.1 200 OK"
+[ 2026-06-16 22:41:05,588] 1025 httpx - INFO = HTTP Request: HEAD https://huggingface.co/datasets/KisanVaani/agriculture-qa-english-only/resolve/2f32fb399fbb71eb417235aeb349e637f785a0fd/dataset_infos.json "HTTP/1.1 404 Not Found"
+[ 2026-06-16 22:41:06,718] 18 root - ERROR = ingestion failed: Cannot save file into a non-existent directory: 'data\raw'
