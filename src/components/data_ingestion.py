@@ -1,8 +1,9 @@
-from datasets import load_dataset
-import sys
-from src.logger import logging
-from src.exceptions import KisanBotException
 import pandas as pd
+import sys
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.schema import Document
+from src.logger import logging
+from src.exception import KisanBotException
 
 def ingest_data(save_path:str =  "data/raw/kisanbot_corpus.csv"):
     try:
