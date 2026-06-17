@@ -19,6 +19,7 @@ def transform_data(csv_path: str = "data/raw/kisanbot_corpus.csv"):
     try:
         logging.info("starting data transformation")
         df = load_raw_data(csv_path)
+        df.drop_duplicates(subset=["question", "answers"], inplace=True)
         df["combined"] = "Question: " + df["question"] + "\nAnswer: " + df["answers"]
         documents = [
             Document(
