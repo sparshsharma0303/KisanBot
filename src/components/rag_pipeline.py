@@ -24,7 +24,7 @@ def retrieve_chunks(vectorestore, question:str , k :int = 3):
         logging.error(f"retrival failed {e}")
         raise KisanBotException(e,sys)
     
-def generate_answer(quesiton:str, chunks:list):
+def generate_answer(question:str, chunks:list):
     try:
         logging.info("building context from the retrived chunks")
         context = "\n\n".join([chunk.page_content for chunk in chunks])
