@@ -24,12 +24,22 @@ def retrieve_chunks(vectorestore, question:str , k :int = 3):
         logging.error(f"retrival failed {e}")
         raise KisanBotException(e,sys)
     
-def generate_answer(question:str, chunks:list):
+def generate_answer(question:str, chunks:list, chat_history: list = []):
     try:
         logging.info("building context from the retrived chunks")
         context = "\n\n".join([chunk.page_content for chunk in chunks])
+        history_text = ""
+        if chat_history:
+            for msg in chat_history[-4:]:
+                role = "Farmer" if msg['role'] == "user" else "KisanBot"
+                history_text += f"{role}:{msg['content']}\n"
+
         prompt = f"""You are KisanBot, a helpful agricultural assistant for Indian farmers.
         Use the context below to answer the question. If the answer is not in the context, say "I don't have enough information on this."
+        
+        Previous conversation:
+        {history_text}
+        
         Context:
         {context}
 

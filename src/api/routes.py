@@ -4,6 +4,7 @@ from src.logger import logging
 from src.exceptions import KisanBotException
 from src.components.agent import build_agent
 from src.api.models import QuestionRequest, AnswerResponse, SourceChunk
+import uuid
 
 router = APIRouter()
 agent = build_agent()
@@ -12,12 +13,17 @@ agent = build_agent()
 def ask_question(request: QuestionRequest):
     try:
         logging.info(f"received question: {request.question}")
-
+        thread_id = request.thread_id if request.thread_id else str(uuid.uuid4())
+        logging.info(f"thread id : {thread_id}")
         result = agent.invoke({
             "question": request.question,
             "chunks":[],
-            "answer":""
-        })
+            "answer":"",
+            "chat_history":[]
+            },
+        config = {"configurable": {"thread_id": thread_id}}
+
+        )
 
         sources = [
             SourceChunk(content = chunk.page_content[:200])
@@ -26,7 +32,8 @@ def ask_question(request: QuestionRequest):
         return AnswerResponse(
             question = request.question,
             answer = result['answer'],
-            sources = sources
+            sources = sources,
+            thread_id = thread_id
         )
     except Exception as e:
         logging.error(f"error processing question: {e}")
