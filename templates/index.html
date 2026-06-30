@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanBot</title>
+</head>
+<body>
+    <div id="app">
+        <div id="header">
+            <h1>KisanBot</h1>
+            <p>YOUR AGRICULTURAL ASSISTANT</p>
+        </div>
+
+        <div id="chat-box"></div>
+        <div id="input-area">
+            <input type="text" name="" id="question-input" placeholder="ask your FARMING quesiton"/>
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <script>
+        let threaID = ""
+        
+        document.getElementById("send-btn").addEventListener('click',sendMessage);
+        document.getElementById('question-input').addEventListener('keypress',function(e){
+            if(e.key == "Enter")sendMessage()
+        });
+
+
+        async function  sendMessage() {
+            const input = document.getElementById('question-input');
+            const quesiton = input.value.trim();
+            if (!quesiton) return;
+
+            addMessage(quesiton,"user");
+            input.value = "";
+
+            const response = await fetch('/ask',{
+                method:"POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify({
+                    quesiton: quesiton,
+                    top_k : 3,
+                    threaID : threaID
+                })
+            });
+            const data = await response.json();
+            threaID = data.threaID;
+            addMessage(data.answer, "bot")
+        }
+
+        function addMessage(text,sender){
+            const chatBox = document.getElementById('chat-box')
+            const msg = document.createElement("div")
+            msg.className = "message" + sender;
+            msg.innerText = text;
+            chatBox.appendChild(msg)
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
